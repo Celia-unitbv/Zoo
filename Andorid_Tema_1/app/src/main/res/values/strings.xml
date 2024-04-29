@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Zoo</string>
+    <string name="close_app">Close</string>
 </resources>
