@@ -9,6 +9,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, ZooListFragment())
+            .commit()
+
         val button: Button = findViewById(R.id.close_button)
         button.setOnClickListener { goToSecondActivity() }
     }
