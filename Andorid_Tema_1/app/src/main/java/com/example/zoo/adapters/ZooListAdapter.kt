@@ -30,52 +30,26 @@ class ZooListAdapter(private val context: Context, private val animals: List<Ani
 
         // Setează culoarea de fundal și alinierea în funcție de continent
         when (animal.continent) {
-            "Europa" -> {
+            "Europe" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.green))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
             }
             "Africa" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.yellow))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                holder.nameTextView.setPadding(0, 0, 0, 5)
-                holder.continentTextView.setPadding(0, 0, 0, 5)
-                holder.nameTextView.append("\n----------------\n")
             }
             "Asia" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.red))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                holder.nameTextView.setPadding(0, 0, 0, 5)
-                holder.continentTextView.setPadding(0, 0, 0, 5)
-                holder.nameTextView.append("\n----------------\n")
             }
-            "America de Nord" -> {
+            "North America" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.brown))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
             }
-            "America de Sud" -> {
+            "South America" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.orange))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
-                holder.nameTextView.setPadding(0, 0, 0, 5)
-                holder.continentTextView.setPadding(0, 0, 0, 5)
-                holder.nameTextView.append("\n----------------\n")
             }
             "Australia" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.purple))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
             }
             "Antarctica" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.blue))
-                holder.nameTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                holder.continentTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                holder.nameTextView.setPadding(0, 0, 0, 5)
-                holder.continentTextView.setPadding(0, 0, 0, 5)
-                holder.nameTextView.append("\n----------------\n")
             }
         }
     }
