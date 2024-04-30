@@ -1,6 +1,7 @@
 package com.example.zoo.adapters
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +12,25 @@ import com.example.zoo.models.Animal
 
 class ZooListAdapter(private val context: Context, private val animals: List<Animal>) :
     RecyclerView.Adapter<ZooListAdapter.ViewHolder>() {
+    companion object {
+        private const val VIEW_TYPE_VERTICAL = 1
+        private const val VIEW_TYPE_HORIZONTAL = 2
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.animal_name)
         val continentTextView: TextView = itemView.findViewById(R.id.animal_continent)
+        val dividerView: View = itemView.findViewById(R.id.divider_view)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutResourceId = when (viewType) {
+            VIEW_TYPE_HORIZONTAL -> R.layout.zoo_list_item_horizontal
+            else -> R.layout.zoo_list_item_vertical
+        }
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.zoo_list_item, parent, false)
+            .inflate(layoutResourceId, parent, false)
         return ViewHolder(view)
     }
 
@@ -28,33 +39,60 @@ class ZooListAdapter(private val context: Context, private val animals: List<Ani
         holder.nameTextView.text = animal.name
         holder.continentTextView.text = animal.continent
 
-        // Setează culoarea de fundal și alinierea în funcție de continent
+        // Setează culoarea de fundal și alinierea textului în funcție de continent
         when (animal.continent) {
             "Europe" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.green))
+                holder.nameTextView.gravity = Gravity.START
+                holder.continentTextView.gravity = Gravity.START
+                holder.dividerView.visibility = View.GONE
             }
             "Africa" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.yellow))
+                holder.nameTextView.gravity = Gravity.START
+                holder.continentTextView.gravity = Gravity.START
+                holder.dividerView.visibility = View.VISIBLE
             }
             "Asia" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.red))
+                holder.nameTextView.gravity = Gravity.START
+                holder.continentTextView.gravity = Gravity.END
+                holder.dividerView.visibility = View.VISIBLE
             }
             "North America" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.brown))
+                holder.nameTextView.gravity = Gravity.END
+                holder.continentTextView.gravity = Gravity.END
+                holder.dividerView.visibility = View.GONE
             }
             "South America" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.orange))
+                holder.nameTextView.gravity = Gravity.END
+                holder.continentTextView.gravity = Gravity.END
+                holder.dividerView.visibility = View.VISIBLE
             }
             "Australia" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.purple))
+                holder.nameTextView.gravity = Gravity.CENTER
+                holder.continentTextView.gravity = Gravity.CENTER
+                holder.dividerView.visibility = View.GONE
             }
             "Antarctica" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.blue))
+                holder.nameTextView.gravity = Gravity.CENTER
+                holder.continentTextView.gravity = Gravity.CENTER
+                holder.dividerView.visibility = View.VISIBLE
             }
         }
     }
+    override fun getItemViewType(position: Int): Int {
+        val animal = animals[position]
+        return when (animal.continent) {
+            "Asia" -> VIEW_TYPE_HORIZONTAL
+            else -> VIEW_TYPE_VERTICAL
+        }
 
-
+    }
     override fun getItemCount(): Int {
         return animals.size
     }
