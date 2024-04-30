@@ -1,17 +1,22 @@
 package com.example.zoo.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zoo.R
 import com.example.zoo.models.Animal
 
-class ZooListAdapter(private val context: Context, private val animals: List<Animal>) :
-    RecyclerView.Adapter<ZooListAdapter.ViewHolder>() {
+class ZooListAdapter(
+    private val context: Context,
+    private val animals: List<Animal>,
+    private val navController: NavController
+) : RecyclerView.Adapter<ZooListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(animal: Animal)
@@ -54,7 +59,13 @@ class ZooListAdapter(private val context: Context, private val animals: List<Ani
         holder.nameTextView.text = animal.name
         holder.continentTextView.text = animal.continent
 
-
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("animalName", animal.name)
+                putString("animalContinent", animal.continent)
+            }
+            navController.navigate(R.id.action_zooListFragment_to_animalDetailsFragment, bundle)
+        }
         // Setează culoarea de fundal și alinierea textului în funcție de continent
         when (animal.continent) {
             "Europe" -> {
