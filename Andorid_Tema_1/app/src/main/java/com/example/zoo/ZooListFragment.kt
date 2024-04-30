@@ -1,5 +1,6 @@
 package com.example.zoo
 
+import AnimalDetailsFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.zoo.adapters.ZooListAdapter
 import com.example.zoo.models.Animal
 
-class ZooListFragment : Fragment() {
+class ZooListFragment : Fragment(), ZooListAdapter.OnItemClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,9 +78,27 @@ class ZooListFragment : Fragment() {
 
         // Creează un adaptor pentru RecyclerView și atașează-l
         val adapter = ZooListAdapter(requireContext(), animals)
+        adapter.onItemClickListener = this // Set the click listener
         recyclerView.adapter = adapter
 
         return view
+
     }
+    override fun onItemClick(animal: Animal) {
+        // Navigate to AnimalDetailsFragment and pass selected animal's data
+        val bundle = Bundle().apply {
+            putString("animalName", animal.name)
+            putString("animalContinent", animal.continent)
+        }
+        val detailsFragment = AnimalDetailsFragment()
+        detailsFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, detailsFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+
 
 }

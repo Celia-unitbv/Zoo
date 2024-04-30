@@ -12,16 +12,31 @@ import com.example.zoo.models.Animal
 
 class ZooListAdapter(private val context: Context, private val animals: List<Animal>) :
     RecyclerView.Adapter<ZooListAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(animal: Animal)
+    }
+
+    var onItemClickListener: OnItemClickListener? = null
+
     companion object {
         private const val VIEW_TYPE_VERTICAL = 1
         private const val VIEW_TYPE_HORIZONTAL = 2
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nameTextView: TextView = itemView.findViewById(R.id.animal_name)
         val continentTextView: TextView = itemView.findViewById(R.id.animal_continent)
         val dividerView: View = itemView.findViewById(R.id.divider_view)
-
+        init {
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                onItemClickListener?.onItemClick(animals[position])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,6 +53,7 @@ class ZooListAdapter(private val context: Context, private val animals: List<Ani
         val animal = animals[position]
         holder.nameTextView.text = animal.name
         holder.continentTextView.text = animal.continent
+
 
         // Setează culoarea de fundal și alinierea textului în funcție de continent
         when (animal.continent) {
