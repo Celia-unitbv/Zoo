@@ -22,7 +22,6 @@ class ZooListFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.animal_list)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        // Crearea unei liste de animale de exemplu (înlocuiește cu datele tale reale)
         val animals = listOf(
             Animal("Hedgehog", "Europe"),
             Animal("Tern", "Antarctica"),

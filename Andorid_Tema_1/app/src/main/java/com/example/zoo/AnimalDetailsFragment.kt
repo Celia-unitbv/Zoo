@@ -16,18 +16,15 @@ class AnimalDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_animal_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the selected animal's data from arguments
         val animalName = arguments?.getString("animalName")
         val animalContinent = arguments?.getString("animalContinent")
 
-        // Update the UI with the selected animal's data
         view.findViewById<TextView>(R.id.animal_name).text = animalName
         view.findViewById<TextView>(R.id.animal_continent).text = animalContinent
         val backgroundColor = when (animalContinent) {
@@ -38,7 +35,7 @@ class AnimalDetailsFragment : Fragment() {
             "South America" -> R.color.orange
             "Australia" -> R.color.purple
             "Antarctica" -> R.color.blue
-            else -> android.R.color.transparent // Default transparent color if continent not found
+            else -> android.R.color.transparent
         }
         view.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
 

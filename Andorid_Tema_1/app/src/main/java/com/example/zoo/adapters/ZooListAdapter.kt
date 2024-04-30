@@ -66,7 +66,7 @@ class ZooListAdapter(
             }
             navController.navigate(R.id.action_zooListFragment_to_animalDetailsFragment, bundle)
         }
-        // Setează culoarea de fundal și alinierea textului în funcție de continent
+
         when (animal.continent) {
             "Europe" -> {
                 holder.itemView.setBackgroundColor(context.getColor(R.color.green))

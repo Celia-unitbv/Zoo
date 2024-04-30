@@ -2,23 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/zooListFragment"> <!-- Specify the start destination here -->
+    app:startDestination="@id/zooListFragment">
 
-    <!-- Define the ZooListFragment as a destination -->
+
     <fragment
         android:id="@+id/zooListFragment"
         android:name="com.example.zoo.ZooListFragment"
         android:label="Zoo List"
         tools:layout="@layout/fragment_zoo_list" />
 
-    <!-- Define the AnimalDetailsFragment as a destination -->
+
     <fragment
         android:id="@+id/animalDetailsFragment"
         android:name="com.example.zoo.AnimalDetailsFragment"
         android:label="Animal Details"
         tools:layout="@layout/fragment_animal_detail" />
 
-    <!-- Define navigation actions between fragments -->
     <action
         android:id="@+id/action_zooListFragment_to_animalDetailsFragment"
         app:destination="@id/animalDetailsFragment" />
