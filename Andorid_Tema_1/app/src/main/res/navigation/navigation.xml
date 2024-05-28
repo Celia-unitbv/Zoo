@@ -9,7 +9,11 @@
         android:id="@+id/zooListFragment"
         android:name="com.example.zoo.ZooListFragment"
         android:label="Zoo List"
-        tools:layout="@layout/fragment_zoo_list" />
+        tools:layout="@layout/fragment_zoo_list">
+    <action
+        android:id="@+id/action_zooListFragment_to_animalDetailsFragment"
+        app:destination="@id/animalDetailsFragment" />
+    </fragment>
 
 
     <fragment
@@ -18,8 +22,6 @@
         android:label="Animal Details"
         tools:layout="@layout/fragment_animal_detail" />
 
-    <action
-        android:id="@+id/action_zooListFragment_to_animalDetailsFragment"
-        app:destination="@id/animalDetailsFragment" />
+
 
 </navigation>

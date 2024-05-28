@@ -39,7 +39,15 @@ class ZooListAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                onItemClickListener?.onItemClick(animals[position])
+                val currentDestination = navController.currentDestination
+                if (currentDestination?.id == R.id.zooListFragment) {
+                    val animal = animals[position]
+                    val bundle = Bundle().apply {
+                        putString("animalName", animal.name)
+                        putString("animalContinent", animal.continent)
+                    }
+                    navController.navigate(R.id.action_zooListFragment_to_animalDetailsFragment, bundle)
+                }
             }
         }
     }
@@ -58,14 +66,7 @@ class ZooListAdapter(
         val animal = animals[position]
         holder.nameTextView.text = animal.name
         holder.continentTextView.text = animal.continent
-
-        holder.itemView.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("animalName", animal.name)
-                putString("animalContinent", animal.continent)
-            }
-            navController.navigate(R.id.action_zooListFragment_to_animalDetailsFragment, bundle)
-        }
+        
 
         when (animal.continent) {
             "Europe" -> {
