@@ -16,6 +16,7 @@ import com.example.zoo.data.Animal
 import com.example.zoo.data.AppDatabase
 import kotlinx.coroutines.launch
 
+// ZooListFragment.kt
 class ZooListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -47,4 +48,5 @@ class ZooListFragment : Fragment() {
         }
     }
 }
+
 

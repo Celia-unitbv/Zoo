@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Starea când butonul nu este apăsat -->
+    <item android:drawable="@drawable/delete_button_default" android:state_pressed="false" />
+
+    <!-- Starea când butonul este apăsat -->
+    <item android:drawable="@drawable/delete_button_pressed" android:state_pressed="true" />
+</selector>
