@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 class ZooListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ZooListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +30,9 @@ class ZooListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_zoo_list, container, false)
         recyclerView = view.findViewById(R.id.animal_list)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
+        adapter = ZooListAdapter(requireContext(), emptyList(), findNavController())
+        recyclerView.adapter = adapter
         setupRecyclerView()
-
         return view
     }
 
@@ -41,12 +42,11 @@ class ZooListFragment : Fragment() {
             val animalsLiveData = db.animalDao().getAllAnimals()
 
             animalsLiveData.observe(viewLifecycleOwner, Observer { animals ->
-                val navController = findNavController()
-                val adapter = ZooListAdapter(requireContext(), animals, navController)
-                recyclerView.adapter = adapter
+                adapter.updateAnimals(animals)
             })
         }
     }
 }
+
 
 

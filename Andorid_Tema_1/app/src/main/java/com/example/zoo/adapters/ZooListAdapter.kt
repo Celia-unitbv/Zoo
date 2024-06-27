@@ -18,16 +18,10 @@ import kotlinx.coroutines.launch
 
 class ZooListAdapter(
     private val context: Context,
-    private val animals: List<Animal>,
+    private var animals: List<Animal>,
     private val navController: NavController
 ) : RecyclerView.Adapter<ZooListAdapter.ViewHolder>() {
 
-    companion object {
-        private const val VIEW_TYPE_VERTICAL = 1
-        private const val VIEW_TYPE_HORIZONTAL = 2
-    }
-
-    // ZooListAdapter.kt
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.animal_name)
         val continentTextView: TextView = itemView.findViewById(R.id.animal_continent)
@@ -45,6 +39,7 @@ class ZooListAdapter(
         }
 
         private fun deleteItem(animal: Animal) {
+            // Delete from Room database
             val db = AppDatabase.getDatabase(itemView.context)
             val animalDao = db.animalDao()
 
@@ -54,30 +49,27 @@ class ZooListAdapter(
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutResourceId = R.layout.zoo_list_item_vertical
-        val view = LayoutInflater.from(parent.context).inflate(layoutResourceId, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.zoo_list_item_vertical, parent, false)
         return ViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val animal = animals[position]
-
-        // Setează numele și continentul
         holder.nameTextView.text = animal.name
         holder.continentTextView.text = animal.continent
+        // You can set other properties here if needed
     }
-
-
-
-    override fun getItemViewType(position: Int): Int {
-        return VIEW_TYPE_VERTICAL
-    }
-
 
     override fun getItemCount(): Int {
         return animals.size
     }
+
+    fun updateAnimals(newAnimals: List<Animal>) {
+        animals = newAnimals
+        notifyDataSetChanged()
+    }
+
+
 }
+
