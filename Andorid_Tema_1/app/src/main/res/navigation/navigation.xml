@@ -1,27 +1,5 @@
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/zooListFragment">
+<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation" app:startDestination="@id/zooListFragment">
+    <fragment android:id="@+id/zooListFragment" android:name="com.example.zoo.ZooListFragment" android:label="Zoo List" tools:layout="@layout/fragment_zoo_list">
 
-
-    <fragment
-        android:id="@+id/zooListFragment"
-        android:name="com.example.zoo.ZooListFragment"
-        android:label="Zoo List"
-        tools:layout="@layout/fragment_zoo_list">
-    <action
-        android:id="@+id/action_zooListFragment_to_animalDetailsFragment"
-        app:destination="@id/animalDetailsFragment" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/animalDetailsFragment"
-        android:name="com.example.zoo.AnimalDetailsFragment"
-        android:label="Animal Details"
-        tools:layout="@layout/fragment_animal_detail" />
-
-
-
 </navigation>
